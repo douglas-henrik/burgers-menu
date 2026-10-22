@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Olá, essa será a página principal.')
+    return render(request, 'index.html')

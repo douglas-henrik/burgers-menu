@@ -1,15 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burgers</title>
+{% block css %}
     <link rel="stylesheet" href="{% static 'main/style/style.css' %}">
-</head>
-<body>
-    <h1>Bem-vindo ao Burgers!</h1>
-    <p>Burgers é um restaurante centrado na produção de hamburgers artesanais.</p>
-    <a href="{% url 'menu' %}">Acessar Menu</a>
-</body>
-</html>
+{% endblock %}
+
+{% block content %}
+
+        <p>Aqui vai ficar todo conteudo da pagina principal</p>
+        <a href="{% url 'menu' %}">Acessar Cardápio</a>
+
+{% endblock %}

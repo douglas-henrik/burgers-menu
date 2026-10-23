@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burgers</title>
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <img src="{% static 'main/assets/logo.png' %}" alt="BurgersHouse">
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Cardápio</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <img src="{% static 'main/assets/logo.png' %}" alt="Logo BurgersHouse">
+        <p>Bons hambúrgueres <br> fazem bons momentos!</p>
+        <a href="#"><img src="{% static 'main/assets/icons/facebook.png' %}" alt="Facebook"></a>
+        <a href="#"><img src="{% static 'main/assets/icons/instagram.png' %}" alt="Instagram"></a>
+        <a href="#"><img src="{% static 'main/assets/icons/twitter.png' %}" alt="Twitter"></a>
+    </footer>
+</body>
+</html>

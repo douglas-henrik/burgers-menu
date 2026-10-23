@@ -1,15 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burgers</title>
+    <link rel="stylesheet" href="{% static 'main/style/style.css' %}">
 </head>
 <body>
     <h1>Bem-vindo ao Burgers!</h1>
     <p>Burgers é um restaurante centrado na produção de hamburgers artesanais.</p>
-    <form action="{%url 'menu' %}">
-        <button type="submit">Acessar Menu</button>
-    </form>
+    <a href="{% url 'menu' %}">Acessar Menu</a>
 </body>
 </html>

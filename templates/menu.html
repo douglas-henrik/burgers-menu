@@ -6,7 +6,21 @@
 
 {% block content %}
 
-        <p>Aqui vai ficar todo cardápio da loja</p>
-        <a href="{% url 'index' %}">Voltar</a>
+        <h1>Nosso cardápio</h1>
+
+        {% for produto in produtos %}
+            <div>
+                <h2>Produto: {{ produto.nome }}</h2>
+                <p>Preço: {{ produto.preco }}</p>
+
+                {% if produto.disponibilidade %}
+                    <p>Em estoque</p>
+                {% else %}
+                    <p>Sem estoque</p>
+                {% endif %}
+            </div>
+            {% empty %}
+                <p>Nenhum produto cadastrado.</p>
+        {% endfor %}
 
 {% endblock %}

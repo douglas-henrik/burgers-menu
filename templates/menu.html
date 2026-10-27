@@ -8,8 +8,10 @@
 
         <a href="{% url 'menu:register' %}">Cadastrar Produtos</a>
 
-        {% if mensagem %}
-            <p>{{ mensagem }}</p>
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
         {% endif %}
 
         <h1>Navegue pelo nosso cardápio</h1>
@@ -17,8 +19,8 @@
 
         {% for produto in produtos %}
             <div>
-                <h2>Produto: {{ produto.nome }}</h2>
-                <p>Preço: {{ produto.preco }}</p>
+                <h2>{{ produto.nome }}</h2>
+                <p>R$ {{ produto.preco }}</p>
 
                 {% if produto.disponibilidade %}
                     <p>Em estoque</p>

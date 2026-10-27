@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse
 from .models import Produto
 from decimal import Decimal, InvalidOperation
+
 
 # Create your views here.
 
@@ -51,16 +53,15 @@ def cadastrar_produto(request):
                 'erros': erros,
             })
 
-        print(nome)
-        print(preco)
-
         Produto.objects.create(nome= nome, preco= preco)
+        messages.success(request, f'Produto {nome} cadastrado com sucesso')
+        return redirect('menu:index')
 
-        return render(request, 'menu.html', {
-            'nome': nome,
-            'preco': preco_text,
-            'erros': {},
-            'mensagem': f'Produtro {nome} cadastrado',
-        })
+        # return render(request, 'menu.html', {
+        #    'nome': nome,
+        #    'preco': preco_text,
+        #    'erros': {},
+        #    'mensagem': f'Produtro {nome} cadastrado',
+        # })
 
     return HttpResponse(status=405)

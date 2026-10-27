@@ -6,7 +6,14 @@
 
 {% block content %}
 
-        <h1>Nosso cardápio</h1>
+        <a href="{% url 'menu:register' %}">Cadastrar Produtos</a>
+
+        {% if mensagem %}
+            <p>{{ mensagem }}</p>
+        {% endif %}
+
+        <h1>Navegue pelo nosso cardápio</h1>
+        <p>Veja todos os produtos disponíveis em nossa hamburgeria</p>
 
         {% for produto in produtos %}
             <div>

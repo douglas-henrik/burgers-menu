@@ -6,7 +6,21 @@
 
 {% block content %}
 
-        <p>Aqui vai ficar todo conteudo da pagina principal</p>
-        <a href="{% url 'menu:index' %}">Acessar Cardápio</a>
+        <section class="header-content-main">
+            <img src="{% static 'main/assets/burger-fundo.png' %}" alt="Imagem de hamburguer de fundo">
+            <h1>Seja bem vindo,<br>ao <strong>BurgerHouse</strong></h1>
+            <a href="{% url 'menu:index' %}">Acessar Cardápio</a>
+        </section>
+        <section class="body-content-main">
+            <h2>Quem somos?</h2>
+            <p>A BurgerHouse nasceu em 2026, idealizada e fundada por mim Douglas Araújo, a partir de um sonho que sempre tive: ter minha própria hamburgueria.<br>
+            O hambúrguer sempre foi meu alimento favorito, e minha paixão pela culinária me fez enxergar nesse sonho uma oportunidade de unir duas coisas 
+            que amo: criar sabores incríveis e proporcionar bons momentos através da comida.<br>
+
+            Mais do que vender hambúrgueres, quero oferecer uma experiência especial em cada pedido, com dedicação, qualidade e muito carinho em cada detalhe. 
+            Acredito que a boa comida tem o poder de reunir pessoas, criar memórias e transformar momentos simples em ocasiões especiais.<br>
+
+            Assim nasceu a BurgerHouse: de um sonho pessoal, movido pela paixão por hambúrgueres e pelo desejo de levar sabor e satisfação a cada cliente.</p>
+        </section>
 
 {% endblock %}

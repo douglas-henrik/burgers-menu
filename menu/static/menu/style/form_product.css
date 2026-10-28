@@ -1,0 +1,227 @@
+/* =========================
+   BASE: HEADER E FOOTER
+   ========================= */
+
+:root {
+    --color-primary: #c62828;
+    --color-primary-dark: #a61f1f;
+    --color-text: #292522;
+    --color-border: #ece7e2;
+    --color-surface: #ffffff;
+    --color-field: #fffdfb;
+    --color-error-bg: #fff0ef;
+    --color-error-text: #a61f1f;
+    --color-focus: rgba(198, 40, 40, 0.14);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text);
+}
+
+main {
+    flex: 1;
+}
+
+body > header,
+body > footer {
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: #ffffff;
+}
+
+body > header {
+    justify-content: space-around;
+    gap: 2rem;
+    padding: 0.75rem 5%;
+}
+
+body > header > img,
+body > footer > img {
+    width: 10rem;
+    height: auto;
+    object-fit: contain;
+}
+
+body > header > nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.5rem, 3vw, 2.5rem);
+}
+
+body > header > nav > a {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 2px solid transparent;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+body > header > nav > a:hover,
+body > header > nav > a:focus-visible {
+    border-bottom-color: #ffd000;
+    color: #ffd000;
+}
+
+body > footer {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+body > footer > a > img {
+    width: 1rem;
+    height: auto;
+}
+
+/* =========================
+   CADASTRO DE PRODUTO
+   ========================= */
+
+.page-create-product {
+    width: min(560px, calc(100% - 32px));
+    margin: 32px auto 64px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(35, 25, 20, 0.07);
+}
+
+/* Título: mantenha o h1 dentro do contêiner .page-create-product
+   para evitar que o seletor global afete títulos de outras páginas. */
+.page-create-product > h1 {
+    margin-bottom: 8px;
+    color: var(--color-text);
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* Rótulos */
+.page-create-product label {
+    margin-top: 8px;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+/* Campos */
+.page-create-product input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #ded7d1;
+    border-radius: 10px;
+    outline: none;
+    background: var(--color-field);
+    color: var(--color-text);
+    font: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-create-product input:hover {
+    border-color: #c7b9af;
+}
+
+.page-create-product input:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-focus);
+}
+
+/* Mensagens de erro */
+.page-create-product p {
+    margin: -4px 0 4px;
+    padding: 10px 12px;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 6px;
+    background: var(--color-error-bg);
+    color: var(--color-error-text);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Botão */
+.page-create-product button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.page-create-product button:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+.page-create-product button:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    body > header {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    body > header > img {
+        width: 8rem;
+    }
+
+    body > header > nav {
+        gap: 0.25rem 0.75rem;
+    }
+
+    .page-create-product {
+        margin-top: 24px;
+        padding: 22px 18px;
+    }
+}
+
+/* Respeita quem prefere menos animações */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

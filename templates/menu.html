@@ -1,41 +1,150 @@
+
 {% extends 'base.html' %}
 {% load static %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'menu/style/style.css' %}">
 {% endblock %}
 
 {% block content %}
 
-        <div class="header-body">
-            <div>
-                <h1 class="title">Navegue pelo nosso cardápio</h1>
-                <p class="description">Veja todos os produtos disponíveis em nossa hamburgeria</p>
-            </div>
-            
-            <a href="{% url 'menu:register' %}" class="button">Cadastrar Produtos</a>
+<main class="menu-page">
+
+    <!-- Cabeçalho do cardápio -->
+    <header class="header-body">
+        <div class="header-text">
+            <span class="eyebrow">BURGERHOUSE</span>
+            <h1 class="title">Nosso cardápio</h1>
+            <p class="description">
+                Descubra seus novos hambúrgueres favoritos.
+            </p>
         </div>
 
+        <a href="{% url 'menu:register' %}" class="button">
+            <span class="button-icon">+</span>
+            Cadastrar produto
+        </a>
+    </header>
+
+    <!-- Lista de produtos -->
+    <section class="products-grid" aria-label="Lista de produtos">
+
         {% for produto in produtos %}
-            <div class="card">
-                <a href="{% url 'menu:product' produto.id %}"><h2 class="title-card">{{ produto.nome }}</h2></a>
-                <p class="price">R$ {{ produto.preco }}</p>
+            <article class="card">
 
-                {% if produto.disponibilidade %}
-                    <p class="status-true">Em estoque</p>
-                {% else %}
-                    <p class="status-false">Sem estoque</p>
-                {% endif %}
+                <a
+                    href="{% url 'menu:product' produto.id %}"
+                    class="product-link"
+                >
+                    <div class="product-image">
+                        <img
+                            src="{% static 'main/assets/burger-default.png' %}"
+                            alt="Imagem ilustrativa de {{ produto.nome }}"
+                            loading="lazy"
+                        >
+                    </div>
 
-                <a href="{% url 'menu:edit_product' produto.id %}">Editar Produto</a>
+                    <div class="product-info">
+                        <h2 class="title-card">{{ produto.nome }}</h2>
+                        <p class="price">
+                            R$ {{ produto.preco|floatformat:2 }}
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Situação do estoque -->
+                <div class="product-status">
+                    {% if produto.disponibilidade %}
+                        <span class="status status-true">
+                            <span class="status-dot"></span>
+                            Em estoque
+                        </span>
+                    {% else %}
+                        <span class="status status-false">
+                            <span class="status-dot"></span>
+                            Sem estoque
+                        </span>
+                    {% endif %}
+                </div>
+
+                <!-- Ações do produto -->
+                <div class="card-actions">
+                    <a
+                        href="{% url 'menu:edit_product' produto.id %}"
+                        class="action-button edit-button"
+                    >
+                        Editar
+                    </a>
+
+                    <form
+                        action="{% url 'menu:delete_product' produto.id %}"
+                        method="post"
+                        class="delete-form"
+                    >
+                        {% csrf_token %}
+                        <button type="submit" class="action-button delete-button">
+                            Excluir
+                        </button>
+                    </form>
+                </div>
+
+            </article>
+
+        {% empty %}
+            <div class="empty-state">
+                <div class="empty-icon">🍔</div>
+                <h2>Nenhum produto cadastrado</h2>
+                <p>Cadastre o primeiro produto para começar a montar seu cardápio.</p>
+                <a href="{% url 'menu:register' %}" class="button">
+                    Cadastrar primeiro produto
+                </a>
             </div>
-            {% empty %}
-                <p class="description">Nenhum produto cadastrado.</p>
         {% endfor %}
 
-        {% if messages %}
-            {% for message in messages %}
-            <p class="message-create">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
+    </section>
+
+</main>
+
+<!-- Mensagens flutuantes do Django -->
+<div class="toast-container" aria-live="polite">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast toast-{{ message.tags }}">
+                <span class="toast-icon" aria-hidden="true">
+                    {% if 'success' in message.tags %}
+                        ✓
+                    {% elif 'error' in message.tags %}
+                        !
+                    {% else %}
+                        i
+                    {% endif %}
+                </span>
+
+                <p>{{ message }}</p>
+
+                <button
+                    type="button"
+                    class="toast-close"
+                    aria-label="Fechar mensagem"
+                    onclick="this.parentElement.remove()"
+                >
+                    &times;
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    document.querySelectorAll('.toast').forEach((toast) => {
+        setTimeout(() => {
+            toast.classList.add('toast-hide');
+
+            setTimeout(() => {
+                toast.remove();
+            }, 350);
+        }, 4500);
+    });
+</script>
 
 {% endblock %}

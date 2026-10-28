@@ -1,0 +1,264 @@
+/* ==================================================
+   BURGERHOUSE — BASE E DETALHES DO PRODUTO
+   ================================================== */
+
+/* Variáveis de cores */
+:root {
+    --color-primary: #c62828;
+    --color-primary-dark: #a61f1f;
+    --color-background: #f7f5f2;
+    --color-surface: #ffffff;
+    --color-text: #292522;
+    --color-muted: #77716c;
+    --color-border: #ece7e2;
+    --color-success: #18864b;
+    --color-success-bg: #e9f7ef;
+    --color-danger: #c62828;
+    --color-danger-bg: #fff0ef;
+}
+
+/* Reset e configurações globais */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--color-background);
+    color: var(--color-text);
+}
+
+main {
+    flex: 1;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* ==================================================
+   CABEÇALHO E RODAPÉ
+   Os seletores body > header/footer evitam que estilos
+   globais afetem cabeçalhos internos das páginas.
+   ================================================== */
+
+body > header,
+body > footer {
+    display: flex;
+    align-items: center;
+    min-height: 5rem;
+    background: rgba(0, 0, 0, 0.87);
+    color: #fff;
+}
+
+body > header {
+    justify-content: space-around;
+    gap: 2rem;
+    padding: 0.75rem 5%;
+}
+
+body > header > img,
+body > footer > img {
+    width: 10rem;
+    height: auto;
+    object-fit: contain;
+}
+
+body > header > nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 3vw, 2.5rem);
+}
+
+body > header > nav > a {
+    padding: 0.75rem 0.25rem;
+    border-bottom: 2px solid transparent;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+body > header > nav > a:hover,
+body > header > nav > a:focus-visible {
+    border-bottom-color: #ffd000;
+    color: #ffd000;
+}
+
+body > footer {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+body > footer > a > img {
+    width: 1rem;
+    height: auto;
+}
+
+/* ==================================================
+   DETALHES DO PRODUTO
+   ================================================== */
+
+.page-product {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 20px 36px;
+
+    width: min(900px, calc(100% - 32px));
+    margin: 56px auto;
+    padding: 32px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(35, 25, 20, 0.08);
+}
+
+/* Imagem do produto */
+.foto-product {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+
+    border-radius: 16px;
+    background: #f7f2ec;
+}
+
+.foto-product img {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.foto-product:hover img {
+    transform: scale(1.04);
+}
+
+/* Nome do produto */
+.page-product h1 {
+    align-self: end;
+    min-width: 0;
+    color: var(--color-text);
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    line-height: 1.2;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+/* Preço */
+.page-product h2 {
+    color: var(--color-primary);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+}
+
+/* Status de estoque: verde por padrão */
+.page-product h3 {
+    justify-self: start;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* Classe específica para produto indisponível */
+.page-product h3.status-false {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+}
+
+/* Foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(198, 40, 40, 0.45);
+    outline-offset: 3px;
+}
+
+/* ==================================================
+   RESPONSIVIDADE
+   ================================================== */
+
+@media (max-width: 650px) {
+    body > header {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        padding: 1rem;
+    }
+
+    body > header > img {
+        width: 8rem;
+    }
+
+    body > header > nav {
+        gap: 0.5rem 1rem;
+    }
+
+    body > header > nav > a {
+        padding: 0.5rem 0.25rem;
+    }
+
+    .page-product {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        width: calc(100% - 28px);
+        margin: 28px auto;
+        padding: 18px;
+    }
+
+    .foto-product {
+        grid-column: 1;
+        grid-row: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .page-product h1,
+    .page-product h2,
+    .page-product h3 {
+        grid-column: 1;
+    }
+
+    body > footer {
+        gap: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

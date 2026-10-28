@@ -25,6 +25,8 @@
                 {% else %}
                     <p class="status-false">Sem estoque</p>
                 {% endif %}
+
+                <a href="{% url 'menu:edit_product' produto.id %}">Editar Produto</a>
             </div>
             {% empty %}
                 <p class="description">Nenhum produto cadastrado.</p>

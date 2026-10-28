@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'menu/style/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+        <h1>{{ produto.nome }}</h1>
+        <h2>R$ {{ produto.preco }}</h2>
+        {% if produto.disponibilidade %}
+            <h3>Em estoque</h3>
+        {% else %}
+            <h3>Sem estoque</h3>
+        {% endif %}
+
+        <form method="POST" action="{% url 'menu:delete_product' produto.id %}">
+            {% csrf_token %}
+            <button type="submit">Excluir Produto</button>
+        </form>
+
+{% endblock %}

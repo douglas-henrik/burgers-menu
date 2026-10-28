@@ -62,3 +62,18 @@ footer {
 footer>a>img {
     width: 1rem;
 }
+
+/*
+ BODY
+ */
+
+ main>div.header-body {
+    height: 6rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ }
+
+ main>div.header-body>a.button {
+    text-decoration: none;
+ }

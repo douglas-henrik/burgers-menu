@@ -65,3 +65,16 @@ def cadastrar_produto(request):
         # })
 
     return HttpResponse(status=405)
+
+def consultar_produto(request, id):
+    produto = Produto.objects.get(id=id)
+    
+    return render(request, 'product.html', {'produto': produto})
+
+def deletar_produto(request, id):
+    produto = Produto.objects.get(id=id)
+
+    produto.delete()
+
+    messages.success(request, f'Produto {produto.nome} deletado')
+    return redirect('menu:index')

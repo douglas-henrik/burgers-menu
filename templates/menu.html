@@ -6,30 +6,34 @@
 
 {% block content %}
 
-        <a href="{% url 'menu:register' %}">Cadastrar Produtos</a>
-
-        {% if messages %}
-            {% for message in messages %}
-            <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-
-        <h1>Navegue pelo nosso cardápio</h1>
-        <p>Veja todos os produtos disponíveis em nossa hamburgeria</p>
+        <div class="header-body">
+            <div>
+                <h1 class="title">Navegue pelo nosso cardápio</h1>
+                <p class="description">Veja todos os produtos disponíveis em nossa hamburgeria</p>
+            </div>
+            
+            <a href="{% url 'menu:register' %}" class="button">Cadastrar Produtos</a>
+        </div>
 
         {% for produto in produtos %}
-            <div>
-                <h2>{{ produto.nome }}</h2>
-                <p>R$ {{ produto.preco }}</p>
+            <div class="card">
+                <a href="{% url 'menu:product' produto.id %}"><h2 class="title-card">{{ produto.nome }}</h2></a>
+                <p class="price">R$ {{ produto.preco }}</p>
 
                 {% if produto.disponibilidade %}
-                    <p>Em estoque</p>
+                    <p class="status-true">Em estoque</p>
                 {% else %}
-                    <p>Sem estoque</p>
+                    <p class="status-false">Sem estoque</p>
                 {% endif %}
             </div>
             {% empty %}
-                <p>Nenhum produto cadastrado.</p>
+                <p class="description">Nenhum produto cadastrado.</p>
         {% endfor %}
+
+        {% if messages %}
+            {% for message in messages %}
+            <p class="message-create">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
 
 {% endblock %}
